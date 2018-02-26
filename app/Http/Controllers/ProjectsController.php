@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectsController extends Controller
 {
@@ -15,6 +16,9 @@ class ProjectsController extends Controller
     public function index()
     {
         //
+        $user_id = Auth::user()->id;
+        $projects = Project::where('user_id', $user_id)->get();
+        return view('projects.index', ['projects'=>$projects]);
     }
 
     /**
@@ -47,6 +51,8 @@ class ProjectsController extends Controller
     public function show(Project $project)
     {
         //
+        $project = Project::find($project->id);
+        return view('projects.show', ['project'=>$project]);
     }
 
     /**
