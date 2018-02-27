@@ -8,7 +8,7 @@
       <!-- The justified navigation menu is meant for single line per list item.
            Multiple lines will require custom code not provided by Bootstrap. -->
       <!-- Jumbotron -->
-      <div class="jumbotron" >
+      <div class="well well-lg" >
         <h1>{{ $project->name }}</h1>
         <p class="lead">{{ $project->description }}</p>
        <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p> -->
@@ -36,10 +36,11 @@
           <div class="sidebar-module">
             <h4>Actions</h4>
             <ol class="list-unstyled">
-              <li><a href="/projects/{{ $project->id }}/edit">Edit</a></li>
-              <li><a href="/projects/create/{{ $project->id }}">Add Project</a></li>
-              <li><a href="/projects">My  projects</a></li>
-              <li><a href="/project/create">Create new project</a></li>
+              <li><a href="/projects/{{ $project->id }}/edit">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a></li>
+              <li><a href="/projects/create/{{ $project->id }}">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>Create new project</a></li>
+              <li><a href="/projects"><i class="fa fa-user-o" aria-hidden="true"></i>My projects</a></li>
             
             <br/>
             
@@ -57,7 +58,7 @@
                       }
                           "
                           >
-                  Delete
+                  <i class="fa fa-power-off" aria-hidden="true"></i>Delete
               </a>
 
               <form id="delete-form" action="{{ route('projects.destroy',[$project->id]) }}" 

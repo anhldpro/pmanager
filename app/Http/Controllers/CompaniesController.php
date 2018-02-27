@@ -29,6 +29,7 @@ class CompaniesController extends Controller
     public function create()
     {
         //
+        return view('companies.create');
     }
 
     /**
@@ -40,6 +41,18 @@ class CompaniesController extends Controller
     public function store(Request $request)
     {
         //
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $user_id = Auth::user()->id;
+
+        $company = new Company;
+        $company->name = $name;
+        $company->description = $description;
+        $company->user_id = $user_id;
+
+        $company->save();
+
+        return view('companies.index');
     }
 
     /**
