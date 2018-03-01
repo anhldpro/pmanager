@@ -35,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('projects/create/{company_id?}', 'ProjectsController@create');
     Route::post('projects/adduser', 'ProjectsController@adduser')->name('projects.adduser');
-    
+    Route::post('tasks/adduser', 'TasksController@adduser')->name('tasks.adduser');
 
     
 });

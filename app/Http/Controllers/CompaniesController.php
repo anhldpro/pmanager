@@ -50,9 +50,17 @@ class CompaniesController extends Controller
         $company->description = $description;
         $company->user_id = $user_id;
 
-        $company->save();
+        $companySave = $company->save();
 
-        return view('companies.index');
+        if($companySave){
+            $user_id = Auth::user()->id;
+            $companies = Company::where('user_id', $user_id)->get();
+
+            return redirect()->route('companies.index')->with('success', 'Company created successfully');
+        }
+
+        return back()->withInput()->with('errors', 'Save company error!');
+        
     }
 
     /**
@@ -78,6 +86,8 @@ class CompaniesController extends Controller
     public function edit(Company $company)
     {
         //
+        $company = Company::find($company->id);
+        return view('companies.edit', ['company'=>$company]);
     }
 
     /**
@@ -90,6 +100,20 @@ class CompaniesController extends Controller
     public function update(Request $request, Company $company)
     {
         //
+        $company = Company::find($company->id);
+        $company->name = $request->input('name');
+        $company->description = $request->input('description');
+
+        $companyUpdate = $company->update();
+
+        if($companyUpdate){
+
+            return redirect()->route('companies.show', ['company' => $company->id])->with('success', 'Company updated successfully!');
+        }
+
+        return back()->withInput()->with('errors', 'Update company error!');
+
+        // return view('companies.index', ['companies' => $companies]);
     }
 
     /**
@@ -101,5 +125,14 @@ class CompaniesController extends Controller
     public function destroy(Company $company)
     {
         //
+        $deleteCompany = Company::where('id', $company->id)->delete();
+
+        if($deleteCompany){
+            $user_id = Auth::user()->id;
+            $companies = Company::where('user_id', $user_id)->get();
+            return redirect()->route('companies.index')->with('success', 'Company deleted successfully!');
+        }
+
+        return back()->with('errors', 'Company could not be deleted!');
     }
 }

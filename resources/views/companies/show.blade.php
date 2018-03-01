@@ -13,12 +13,14 @@
         <p class="lead">{{ $company->description }}</p>
        <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p> -->
       </div>
-
+      
+      <a href="/projects/create/{{ $company->id }}" class="pull-right btn btn-default btn-sm" >Add Project</a>
+      
       <!-- Example row of columns -->
       <div class="row  col-md-12 col-lg-12 col-sm-12" style="background: white; margin: 10px; ">
-      <a href="/projects/create/{{ $company->id }}" class="pull-right btn btn-default btn-sm" >Add Project</a>
+      
       @foreach($company->projects as $project)
-        <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="col-lg-4 col-md-4 col-sm-4" >
           <h2>{{ $project->name }}</h2>
           <p class="text-danger"> {{$project->description}} </p>
           <p><a class="btn btn-primary" href="/projects/{{ $project->id }}" role="button"> View Project »</a></p>
@@ -29,17 +31,17 @@
 
 
 <div class="col-sm-3 col-md-3 col-lg-3 pull-right">
-          <!--<div class="sidebar-module sidebar-module-inset">
-            <h4>About</h4>
-            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-          </div> -->
           <div class="sidebar-module">
             <h4>Actions</h4>
             <ol class="list-unstyled">
-              <li><a href="/companies/{{ $company->id }}/edit">Edit</a></li>
-              <li><a href="/projects/create/{{ $company->id }}">Add Project</a></li>
-              <li><a href="/companies">My  Companies</a></li>
-              <li><a href="/company/create">Create new Company</a></li>
+              <li><a href="/companies/{{ $company->id }}/edit">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a></li>
+              <li><a href="/projects/create/{{ $company->id }}">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>Add Project</a></li>
+              <li><a href="/companies">
+                <i class="fa fa-user-o" aria-hidden="true"></i>My  Companies</a></li>
+              <li><a href="/companies/create">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>Create new Company</a></li>
             
             <br/>
             
@@ -57,7 +59,7 @@
                       }
                           "
                           >
-                  Delete
+                  <i class="fa fa-power-off" aria-hidden="true"></i>Delete
               </a>
 
               <form id="delete-form" action="{{ route('companies.destroy',[$company->id]) }}" 
